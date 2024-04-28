@@ -43,6 +43,10 @@ public class Vertex {
         return this.getName().equals(other.getName()) && this.getX() == other.getX() && this.getY() == other.getY();
     }
 
+    public boolean notEquals(Vertex other) {
+        return !this.equals(other);
+    }
+
     @Override
     public String toString() {
         return "Vertex [" + name + ", " + x + ", " + y + "]";

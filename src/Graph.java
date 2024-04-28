@@ -105,4 +105,31 @@ public class Graph {
 
         return sb.toString();
     }
+
+    // Adapted from https://github.com/ClaireLee22/Detect-cycle-in-a-graph/blob/main/detect%20cycle%20in%20undirected%20graph/has_cycle.py
+    public boolean hasCycles() {
+        LinkedHashSet<Vertex> visited = new LinkedHashSet<>();
+
+        for(Vertex v : adjVertices.keySet()) {
+            if (!visited.contains(v) && cycleExists(v, visited, null)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean cycleExists(Vertex current, LinkedHashSet<Vertex> visited, Vertex parent) {
+        if (visited.contains(current)) {
+            return true;
+        }
+
+        visited.add(current);
+        List<Vertex> neighbors = getNeighbors(current);
+        for (Vertex neighbor : neighbors) {
+            if (neighbor.notEquals(parent) && cycleExists(neighbor, visited, current)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

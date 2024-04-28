@@ -21,7 +21,12 @@ public class Main {
         g.addEdge(vB, vD);
         g.addEdge(vD, vC);
 
+        // Creates cycles
+        g.addEdge(vE, vF);
+        g.addEdge(vA, vC);
+
         System.out.println(g.getDepthFirstSearch(vA));
         System.out.println(g.getBreadthFirstSearch(vA));
+        System.out.println("Graph has cycles: " + g.hasCycles());
     }
 }
