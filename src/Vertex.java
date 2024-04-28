@@ -1,7 +1,7 @@
 public class Vertex {
-    private String name;
-    private int x;
-    private int y;
+    private final String name;
+    private final int x;
+    private final int y;
 
     public Vertex(String name, int x, int y) {
         this.name = name;
