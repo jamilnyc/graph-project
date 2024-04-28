@@ -28,10 +28,10 @@ public class Graph {
     }
 
     public void addEdge(Vertex v1, Vertex v2) {
-       List<Vertex> v1List = getAdjacentVertices(v1);
-       List<Vertex> v2List = getAdjacentVertices(v2);
-       v1List.add(v2);
-       v2List.add(v1);
+        List<Vertex> v1List = getAdjacentVertices(v1);
+        List<Vertex> v2List = getAdjacentVertices(v2);
+        v1List.add(v2);
+        v2List.add(v1);
     }
 
     public void removeEdge(Vertex v1, Vertex v2) {
@@ -75,24 +75,25 @@ public class Graph {
         return sb.toString();
     }
 
-     private LinkedHashSet<Vertex> breadthFirstSearch(Vertex root) {
-         LinkedHashSet<Vertex> visited = new LinkedHashSet<>();
-         Queue<Vertex> queue = new LinkedList<>();
-         queue.add(root);
-         visited.add(root);
+    // Adapted from https://www.baeldung.com/java-graphs
+    private LinkedHashSet<Vertex> breadthFirstSearch(Vertex root) {
+        LinkedHashSet<Vertex> visited = new LinkedHashSet<>();
+        Queue<Vertex> queue = new LinkedList<>();
+        queue.add(root);
+        visited.add(root);
 
-         while (!queue.isEmpty()) {
-             Vertex current = queue.remove();
-             for (Vertex v : getNeighbors(current)) {
-                 if (!visited.contains(v)) {
-                     queue.add(v);
-                     visited.add(v);
-                 }
-             }
-         }
+        while (!queue.isEmpty()) {
+            Vertex current = queue.remove();
+            for (Vertex v : getNeighbors(current)) {
+                if (!visited.contains(v)) {
+                    queue.add(v);
+                    visited.add(v);
+                }
+            }
+        }
 
-         return visited;
-     }
+        return visited;
+    }
 
     public String getBreadthFirstSearch(Vertex root) {
         LinkedHashSet<Vertex> visited = breadthFirstSearch(root);

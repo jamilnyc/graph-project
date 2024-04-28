@@ -40,9 +40,7 @@ public class Vertex {
 
         // Vertices are equal if they have the same name and coordinates
         Vertex other = (Vertex) obj;
-        return this.getName().equals(other.getName())
-                && this.getX() == other.getX()
-                && this.getY() == other.getY();
+        return this.getName().equals(other.getName()) && this.getX() == other.getX() && this.getY() == other.getY();
     }
 
     @Override
