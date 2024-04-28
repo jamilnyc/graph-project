@@ -22,6 +22,6 @@ public class Main {
         g.addEdge(vD, vC);
 
         System.out.println(g.getDepthFirstSearch(vA));
-
+        System.out.println(g.getBreadthFirstSearch(vA));
     }
 }

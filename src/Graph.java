@@ -7,11 +7,11 @@ public class Graph {
         adjVertices = new HashMap<>();
     }
 
-    void addVertex(Vertex vertex) {
+    public void addVertex(Vertex vertex) {
         adjVertices.putIfAbsent(vertex, new ArrayList<>());
     }
 
-    void removeVertex(Vertex vertex) {
+    public void removeVertex(Vertex vertex) {
         // Remove any edges connected to this vertex
         adjVertices.values().forEach(list -> list.remove(vertex));
 
@@ -27,25 +27,26 @@ public class Graph {
         return adjacentVertices;
     }
 
-    void addEdge(Vertex v1, Vertex v2) {
+    public void addEdge(Vertex v1, Vertex v2) {
        List<Vertex> v1List = getAdjacentVertices(v1);
        List<Vertex> v2List = getAdjacentVertices(v2);
        v1List.add(v2);
        v2List.add(v1);
     }
 
-    void removeEdge(Vertex v1, Vertex v2) {
+    public void removeEdge(Vertex v1, Vertex v2) {
         List<Vertex> v1List = getAdjacentVertices(v1);
         List<Vertex> v2List = getAdjacentVertices(v2);
         v1List.remove(v2);
         v2List.remove(v1);
     }
 
-    List<Vertex> getNeighbors(Vertex v1) {
+    private List<Vertex> getNeighbors(Vertex v1) {
         return adjVertices.get(v1);
     }
 
-    LinkedHashSet<Vertex> depthFirstSearch(Vertex root) {
+    // Adapted from https://www.baeldung.com/java-graphs
+    private LinkedHashSet<Vertex> depthFirstSearch(Vertex root) {
         LinkedHashSet<Vertex> visited = new LinkedHashSet<>();
         Stack<Vertex> stack = new Stack<>();
         stack.push(root);
@@ -66,6 +67,7 @@ public class Graph {
     public String getDepthFirstSearch(Vertex root) {
         LinkedHashSet<Vertex> visited = depthFirstSearch(root);
         StringBuilder sb = new StringBuilder();
+        sb.append("Depth First Search: ");
         for (Vertex v : visited) {
             sb.append(v.getName()).append(" ");
         }
@@ -73,5 +75,33 @@ public class Graph {
         return sb.toString();
     }
 
+     private LinkedHashSet<Vertex> breadthFirstSearch(Vertex root) {
+         LinkedHashSet<Vertex> visited = new LinkedHashSet<>();
+         Queue<Vertex> queue = new LinkedList<>();
+         queue.add(root);
+         visited.add(root);
 
+         while (!queue.isEmpty()) {
+             Vertex current = queue.remove();
+             for (Vertex v : getNeighbors(current)) {
+                 if (!visited.contains(v)) {
+                     queue.add(v);
+                     visited.add(v);
+                 }
+             }
+         }
+
+         return visited;
+     }
+
+    public String getBreadthFirstSearch(Vertex root) {
+        LinkedHashSet<Vertex> visited = breadthFirstSearch(root);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Breadth First Search: ");
+        for (Vertex v : visited) {
+            sb.append(v.getName()).append(" ");
+        }
+
+        return sb.toString();
+    }
 }
