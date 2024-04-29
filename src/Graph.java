@@ -1,26 +1,26 @@
 import java.util.*;
 
 public class Graph {
-    private Map<Vertex, List<Vertex>> adjVertices;
+    private Map<Vertex, List<Vertex>> adjacencyList;
 
     public Graph() {
-        adjVertices = new HashMap<>();
+        adjacencyList = new HashMap<>();
     }
 
     public void addVertex(Vertex vertex) {
-        adjVertices.putIfAbsent(vertex, new ArrayList<>());
+        adjacencyList.putIfAbsent(vertex, new ArrayList<>());
     }
 
     public void removeVertex(Vertex vertex) {
         // Remove any edges connected to this vertex
-        adjVertices.values().forEach(list -> list.remove(vertex));
+        adjacencyList.values().forEach(list -> list.remove(vertex));
 
         // Remove the vertex itself
-        adjVertices.remove(vertex);
+        adjacencyList.remove(vertex);
     }
 
     private List<Vertex> getAdjacentVertices(Vertex vertex) {
-        List<Vertex> adjacentVertices = adjVertices.get(vertex);
+        List<Vertex> adjacentVertices = adjacencyList.get(vertex);
         if (adjacentVertices == null) {
             throw new NonExistentVertexException("Vertex " + vertex + " does not exist in graph");
         }
@@ -42,7 +42,7 @@ public class Graph {
     }
 
     private List<Vertex> getNeighbors(Vertex v1) {
-        return adjVertices.get(v1);
+        return adjacencyList.get(v1);
     }
 
     // Adapted from https://www.baeldung.com/java-graphs
@@ -110,7 +110,7 @@ public class Graph {
     public boolean hasCycles() {
         LinkedHashSet<Vertex> visited = new LinkedHashSet<>();
 
-        for(Vertex v : adjVertices.keySet()) {
+        for(Vertex v : adjacencyList.keySet()) {
             if (!visited.contains(v) && cycleExists(v, visited, null)) {
                 return true;
             }
@@ -137,6 +137,6 @@ public class Graph {
         LinkedHashSet<Vertex> visited = depthFirstSearch(root);
 
         // If connected, you should have visited all the nodes
-        return visited.size() == adjVertices.size();
+        return visited.size() == adjacencyList.size();
     }
 }
