@@ -132,4 +132,11 @@ public class Graph {
         }
         return false;
     }
+
+    public boolean isConnected(Vertex root) {
+        LinkedHashSet<Vertex> visited = depthFirstSearch(root);
+
+        // If connected, you should have visited all the nodes
+        return visited.size() == adjVertices.size();
+    }
 }
