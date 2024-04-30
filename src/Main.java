@@ -47,7 +47,7 @@ public class Main extends Application {
         System.out.println("Graph has cycles: " + g.hasCycles());
         System.out.println("Is Connected: " + g.isConnected(vA));
 
-        pane = new GraphPane(g);
+        pane = new GraphPane();
         launch(args);
     }
 

@@ -1,9 +1,9 @@
 public class Vertex {
     private final String name;
-    private final int x;
-    private final int y;
+    private final double x;
+    private final double y;
 
-    public Vertex(String name, int x, int y) {
+    public Vertex(String name, double x, double y) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -13,11 +13,11 @@ public class Vertex {
         return name;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
