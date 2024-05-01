@@ -2,12 +2,17 @@ import java.util.*;
 
 public class Graph {
     private Map<Vertex, List<Vertex>> adjacencyList;
+    private Vertex root;
 
     public Graph() {
         adjacencyList = new HashMap<>();
     }
 
     public void addVertex(Vertex vertex) {
+        if (adjacencyList.isEmpty()) {
+            root = vertex;
+        }
+
         adjacencyList.putIfAbsent(vertex, new ArrayList<>());
     }
 
@@ -138,5 +143,23 @@ public class Graph {
 
         // If connected, you should have visited all the nodes
         return visited.size() == adjacencyList.size();
+    }
+
+    public Set<Vertex> getVertices() {
+        return adjacencyList.keySet();
+    }
+
+    public Map<Vertex, List<Vertex>> getAdjacencyList() {
+        return adjacencyList;
+    }
+
+    public Vertex getVertexByName(String name) {
+        for (Vertex v : getVertices()) {
+            if (v.getName().equals(name)) {
+                return v;
+            }
+        }
+
+        throw new NonExistentVertexException("Vertex with name " + name + " does not exist in graph");
     }
 }

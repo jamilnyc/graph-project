@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -70,6 +72,7 @@ public class Main extends Application {
         hbox.setAlignment(Pos.BASELINE_CENTER);
         hbox.setSpacing(10);
         Button addEdge = new Button("Add Edge");
+
         hbox.getChildren().add(addEdge);
 
         Label vertex1Label = new Label("Vertex 1");
@@ -79,6 +82,17 @@ public class Main extends Application {
         Label vertex2Label = new Label("Vertex 2");
         TextField vertex2Text = new TextField();
         vertex2Text.setPrefColumnCount(2);
+
+        EventHandler<ActionEvent> addEdgeEvent = new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Add Edge Button clicked!");
+                String name1 = vertex1Text.getText().toUpperCase();
+                String name2 = vertex2Text.getText().toUpperCase();
+                pane.addEdge(name1, name2);
+            }
+        };
+        addEdge.setOnAction(addEdgeEvent);
 
         hbox.getChildren().add(vertex1Label);
         hbox.getChildren().add(vertex1Text);
